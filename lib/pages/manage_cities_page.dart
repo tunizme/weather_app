@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:weather_app/model/index.dart';
 import 'package:weather_app/models/city.dart';
-import 'package:weather_app/models/location_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:weather_app/models/location_model.dart';
 import 'package:weather_app/pages/home_page.dart';
 
 const Duration fakeAPIDuration = Duration(seconds: 1);
@@ -39,15 +37,38 @@ class _ManageCitiesPage extends State<ManageCitiesPage> {
           ),
           title: const Text('Manage Cities')),
       body: Padding(
-        padding: const EdgeInsets.all(40),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const _AsyncSearchAnchor(),
             const SizedBox(height: 20),
-            LocationWidget(
-              cities: cities,
-            ),
+            SizedBox(
+                height: 360,
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: cities.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        padding: const EdgeInsets.all(16.0),
+                        margin: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Colors
+                              .lightBlue[100], // Light blue background color
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              cities[index].cityData.name,
+                              style: const TextStyle(fontSize: 20.0),
+                            ),
+                            const Icon(Icons.location_on),
+                          ],
+                        ),
+                      );
+                    }))
           ],
         ),
       ),
@@ -81,8 +102,10 @@ class _AsyncSearchAnchorState extends State<_AsyncSearchAnchor> {
       if (result.length == 0) return const Iterable<String>.empty();
       var resultData = result[0];
       setState(() {
-        _cityData = resultData;
-        options.add(_cityData['name'].toString());
+        if (mounted) {
+          _cityData = resultData;
+          options.add(_cityData['name'].toString());
+        }
       });
       return options;
     } else {
@@ -128,7 +151,7 @@ class _AsyncSearchAnchorState extends State<_AsyncSearchAnchor> {
         return SearchBar(
           controller: SearchController(),
           padding: MaterialStateProperty.all<EdgeInsets>(
-            const EdgeInsets.symmetric(horizontal: 16.0),
+            const EdgeInsets.symmetric(horizontal: 20.0),
           ),
           onTap: () {
             controller.openView();
@@ -147,15 +170,18 @@ class _AsyncSearchAnchorState extends State<_AsyncSearchAnchor> {
         _lastOptions = List<ListTile>.generate(options.length, (int index) {
           final String item = options[index];
           return ListTile(
+            titleTextStyle: const TextStyle(fontSize: 20, color: Colors.black),
             title: Text(item),
             onTap: () {
-              City.addCity(CityData(
-                  name: _cityData['name'],
-                  lat: _cityData['latitude'],
-                  lon: _cityData['longitude']));
-              Navigator.pop(
-                context,
-              );
+              setState(() {
+                City.addCity(CityData(
+                    name: _cityData['name'],
+                    lat: _cityData['latitude'],
+                    lon: _cityData['longitude']));
+                cities = City.getCities();
+                controller.closeView(item);
+                Navigator.pop(context);
+              });
             },
           );
         });
@@ -220,72 +246,16 @@ class _CancelException implements Exception {
   const _CancelException();
 }
 
-class LocationWidget extends StatefulWidget {
-  final List<City>? cities;
-  const LocationWidget({super.key, this.cities});
-  @override
-  State<LocationWidget> createState() => _LocationWidget();
-}
+// class LocationWidget extends StatefulWidget {
+//   const LocationWidget({super.key});
+//   @override
+//   State<LocationWidget> createState() => _LocationWidget();
+// }
 
-class _LocationWidget extends State<LocationWidget> {
-  List<City>? newCites;
-  @override
-  void initState() {
-    newCites = widget.cities;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<Index>(builder: (context, index, child) {
-      return SizedBox(
-          width: double.infinity,
-          height: 460,
-          child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: newCites?.length,
-              itemBuilder: (BuildContext context, int index1) {
-                return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        index.setIndex = index1;
-                      });
-
-                      Navigator.pop(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()));
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(16.0),
-                      margin: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: Colors
-                            .lightBlue[100], // Light blue background color
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                newCites![index1].cityData.name,
-                                style: const TextStyle(fontSize: 20.0),
-                              ),
-                              const SizedBox(height: 8.0),
-                            ],
-                          ),
-                          const Icon(
-                            Icons.cloud, // Cloud icon
-                            size: 32.0,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                    ));
-              }));
-    });
-  }
-}
+// class _LocationWidget extends State<LocationWidget> {
+//   @override
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }

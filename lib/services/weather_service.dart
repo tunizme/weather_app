@@ -16,8 +16,6 @@ class WeatherService {
   WeatherService(this.apiKey);
   WeatherData? weatherData;
 
-  // CityName getCityName() => cityName!;
-
   Future<CityData> getLocation() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -29,19 +27,8 @@ class WeatherService {
         '$baseUrlLocation?lat=${position.latitude}&lon=${position.longitude}&appid=$apiKey'));
     final jsonresponse = jsonDecode(response.body);
     final cityData = jsonresponse[0];
-    // City.addCity(CityData.fromJson(cityData));
-    // print(cityData);
     return CityData.fromJson(cityData);
   }
-
-  // Future<CityData> getLocation(var location) async {
-  //   final response = await http.get(Uri.parse(
-  //       '$baseUrlLocation?lat=${location.lat}&lon=${location.lon}&appid=$apiKey'));
-  //   final jsonresponse = jsonDecode(response.body);
-  //   final cityData = jsonresponse[0];
-  //   // City.addCity(CityData.fromJson(cityData));
-  //   return CityData.fromJson(cityData);
-  // }
 
   Future<WeatherData> getWeather(var cityData) async {
     final lat = cityData.lat;

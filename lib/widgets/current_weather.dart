@@ -27,12 +27,12 @@ class CurrentWeatherWidget extends StatelessWidget {
               child: Opacity(
                 opacity: 0.96,
                 child: Image.asset(
-                    'assets/${weatherDataCurrent?.current.weather![0].icon ?? '01d'}.png'),
+                    'assets/images/${weatherDataCurrent?.current.weather![0].icon ?? '01d'}.png'),
               ),
               // AssetImage(getWeatherIcon(_weather?.weatherMain))),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 60, top: 120),
+              padding: const EdgeInsets.only(right: 48, top: 120),
               child: Text(
                 weatherDataCurrent?.current.weather![0].main ?? 'Rainy',
                 style: const TextStyle(
@@ -60,62 +60,65 @@ class CurrentWeatherWidget extends StatelessWidget {
           height: 20,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-              height: 60,
-              width: 60,
-              padding: const EdgeInsets.all(16),
+              height: 68,
+              width: 68,
+              padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                  color: Colors.cyan, borderRadius: BorderRadius.circular(15)),
-              child: Image.asset("assets/cloud.png"),
+                  color: const Color.fromARGB(255, 177, 213, 247),
+                  borderRadius: BorderRadius.circular(15)),
+              child: Image.asset("assets/images/cloud.png"),
             ),
             Container(
-              height: 60,
-              width: 60,
-              padding: const EdgeInsets.all(16),
+              height: 68,
+              width: 68,
+              padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                  color: Colors.cyan, borderRadius: BorderRadius.circular(15)),
-              child: Image.asset("assets/humidity.png"),
+                  color: const Color.fromARGB(255, 177, 213, 247),
+                  borderRadius: BorderRadius.circular(15)),
+              child: Image.asset("assets/images/humidity.png"),
             ),
             Container(
-              height: 60,
-              width: 60,
-              padding: const EdgeInsets.all(16),
+              height: 68,
+              width: 68,
+              padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                  color: Colors.cyan, borderRadius: BorderRadius.circular(15)),
-              child: Image.asset("assets/windspeed.png"),
+                  color: const Color.fromARGB(255, 177, 213, 247),
+                  borderRadius: BorderRadius.circular(15)),
+              child: Image.asset("assets/images/windspeed.png"),
             ),
           ],
         ),
         const SizedBox(
           height: 10,
         ),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           SizedBox(
             height: 20,
-            width: 60,
+            width: 68,
             child: Text(
               "${weatherDataCurrent?.current.clouds ?? '0'}%",
-              style: const TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
               textAlign: TextAlign.center,
             ),
           ),
           SizedBox(
             height: 20,
-            width: 60,
+            width: 68,
             child: Text(
               "${weatherDataCurrent?.current.humidity ?? '0'}%",
-              style: const TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
               textAlign: TextAlign.center,
             ),
           ),
           SizedBox(
             height: 20,
-            width: 60,
+            width: 68,
             child: Text(
               "${weatherDataCurrent?.current.windSpeed ?? '0'}m/s",
-              style: const TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
               textAlign: TextAlign.center,
             ),
           )

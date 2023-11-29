@@ -18,11 +18,14 @@ class City {
   //Get the selected cities
   static List<City> getCities() => citiesList;
   static addCity(CityData cityData) {
-    // String newCityName = TiengViet.parse(cityData.name);
-    // List<City> newList = citiesList;
-    // newList.firstWhere((e) => e.cityData.name == cityData.name);
     if (!checkContains(cityData.name)) {
       citiesList.add(City(cityData: cityData));
+    }
+  }
+
+  static removeCity(City city) {
+    if (citiesList.length != 1) {
+      citiesList.remove(city);
     }
   }
 }

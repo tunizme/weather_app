@@ -42,15 +42,13 @@ class DailyWeatherWidget extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        if (index != 0) {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) => DetailPage(
-                                        weatherDataDaily: weatherDataDaily,
-                                        index: index,
-                                      )));
-                        }
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => DetailPage(
+                                      weatherDataDaily: weatherDataDaily,
+                                      index: index,
+                                    )));
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -59,7 +57,9 @@ class DailyWeatherWidget extends StatelessWidget {
                             left: 10, right: 10, bottom: 10, top: 10),
                         width: 70,
                         decoration: BoxDecoration(
-                            color: index == 0 ? Colors.blue : Colors.cyan,
+                            color: index == 0
+                                ? Colors.lightBlue
+                                : const Color.fromARGB(255, 177, 213, 247),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(24)),
                             boxShadow: const [
@@ -72,16 +72,26 @@ class DailyWeatherWidget extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(getDate(weatherDataDaily?.daily[index].dt)),
+                            Text(
+                              getDate(weatherDataDaily?.daily[index].dt),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w500),
+                            ),
                             Image.network(
                               'https://openweathermap.org/img/wn/${weatherDataDaily?.daily[index].weather![0].icon ?? '01d'}@2x.png',
                             ),
                             Text(
                               '${weatherDataDaily?.daily[index].temp!.max ?? 0}°',
-                              style: const TextStyle(color: Colors.white),
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
                             ),
                             Text(
-                                '${weatherDataDaily?.daily[index].temp!.min ?? 0}°'),
+                              '${weatherDataDaily?.daily[index].temp!.min ?? 0}°',
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ],
                         ),
                       ),

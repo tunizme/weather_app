@@ -167,7 +167,7 @@ class _DetailPage extends State<DetailPage> {
                                 top: -20,
                                 left: 20,
                                 child: Image.asset(
-                                  'assets/${widget.weatherDataDaily?.daily[widget.index!].weather![0].icon}.png',
+                                  'assets/images/${widget.weatherDataDaily?.daily[widget.index!].weather![0].icon}.png',
                                   //replace
                                   width: 150,
                                 ),
@@ -187,6 +187,7 @@ class _DetailPage extends State<DetailPage> {
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                 ),
@@ -210,8 +211,8 @@ class _DetailPage extends State<DetailPage> {
                                               children: [
                                                 const Text(
                                                   'Cloud',
-                                                  //replace
                                                   style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
                                                     color: Color.fromARGB(
                                                         137, 57, 45, 45),
                                                   ),
@@ -233,7 +234,7 @@ class _DetailPage extends State<DetailPage> {
                                                                 15)),
                                                   ),
                                                   child: Image.asset(
-                                                      'assets/cloud.png'),
+                                                      'assets/images/cloud.png'),
                                                   //replace
                                                 ),
                                                 const SizedBox(
@@ -243,7 +244,7 @@ class _DetailPage extends State<DetailPage> {
                                                   '${widget.weatherDataDaily?.daily[widget.index!].clouds}%',
                                                   //Replace
                                                   style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
+                                                    fontWeight: FontWeight.w500,
                                                   ),
                                                 )
                                               ],
@@ -252,8 +253,8 @@ class _DetailPage extends State<DetailPage> {
                                               children: [
                                                 const Text(
                                                   'Humidity',
-                                                  //replace
                                                   style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
                                                     color: Colors.black54,
                                                   ),
                                                 ),
@@ -274,7 +275,7 @@ class _DetailPage extends State<DetailPage> {
                                                                 15)),
                                                   ),
                                                   child: Image.asset(
-                                                      'assets/humidity.png'),
+                                                      'assets/images/humidity.png'),
                                                   //replace
                                                 ),
                                                 const SizedBox(
@@ -284,7 +285,7 @@ class _DetailPage extends State<DetailPage> {
                                                   '${widget.weatherDataDaily?.daily[widget.index!].humidity}%',
                                                   //Replace
                                                   style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
+                                                    fontWeight: FontWeight.w500,
                                                   ),
                                                 )
                                               ],
@@ -293,8 +294,8 @@ class _DetailPage extends State<DetailPage> {
                                               children: [
                                                 const Text(
                                                   'Windspeed',
-                                                  //replace
                                                   style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
                                                     color: Colors.black54,
                                                   ),
                                                 ),
@@ -315,7 +316,7 @@ class _DetailPage extends State<DetailPage> {
                                                                 15)),
                                                   ),
                                                   child: Image.asset(
-                                                      'assets/windspeed.png'),
+                                                      'assets/images/windspeed.png'),
                                                   //replace
                                                 ),
                                                 const SizedBox(
@@ -325,7 +326,7 @@ class _DetailPage extends State<DetailPage> {
                                                   '${widget.weatherDataDaily?.daily[widget.index!].windSpeed}m/s',
                                                   //Replace
                                                   style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
+                                                    fontWeight: FontWeight.w500,
                                                   ),
                                                 )
                                               ],
@@ -335,142 +336,6 @@ class _DetailPage extends State<DetailPage> {
                                         const SizedBox(
                                           height: 16,
                                         ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceEvenly,
-                                        //   children: [
-                                        //     Column(
-                                        //       children: [
-                                        //         const Text(
-                                        //           'Rainy',
-                                        //           //replace
-                                        //           style: TextStyle(
-                                        //             color: Colors.black54,
-                                        //           ),
-                                        //         ),
-                                        //         const SizedBox(
-                                        //           height: 8,
-                                        //         ),
-                                        //         Container(
-                                        //           padding: const EdgeInsets.all(
-                                        //               10.0),
-                                        //           height: 70,
-                                        //           width: 70,
-                                        //           decoration:
-                                        //               const BoxDecoration(
-                                        //             color: Color(0xffE0E8FB),
-                                        //             borderRadius:
-                                        //                 BorderRadius.all(
-                                        //                     Radius.circular(
-                                        //                         15)),
-                                        //           ),
-                                        //           child: Image.asset(
-                                        //               'assets/rainy.png'),
-                                        //           //replace
-                                        //         ),
-                                        //         const SizedBox(
-                                        //           height: 8,
-                                        //         ),
-                                        //         Text(
-                                        //           '${widget.weatherDataDaily?.daily[widget.index!].rain}mm/h',
-                                        //           //Replace
-                                        //           style: const TextStyle(
-                                        //             fontWeight: FontWeight.bold,
-                                        //           ),
-                                        //         )
-                                        //       ],
-                                        //     ),
-                                        //     Column(
-                                        //       children: [
-                                        //         const Text(
-                                        //           'Sunrise',
-                                        //           //replace
-                                        //           style: TextStyle(
-                                        //             color: Color.fromARGB(
-                                        //                 137, 57, 45, 45),
-                                        //           ),
-                                        //         ),
-                                        //         const SizedBox(
-                                        //           height: 8,
-                                        //         ),
-                                        //         Container(
-                                        //           padding: const EdgeInsets.all(
-                                        //               10.0),
-                                        //           height: 70,
-                                        //           width: 70,
-                                        //           decoration:
-                                        //               const BoxDecoration(
-                                        //             color: Color(0xffE0E8FB),
-                                        //             borderRadius:
-                                        //                 BorderRadius.all(
-                                        //                     Radius.circular(
-                                        //                         15)),
-                                        //           ),
-                                        //           child: Image.asset(
-                                        //               'assets/sunrise.png'),
-                                        //           //replace
-                                        //         ),
-                                        //         const SizedBox(
-                                        //           height: 8,
-                                        //         ),
-                                        //         Text(
-                                        //           getTime(widget
-                                        //               .weatherDataDaily
-                                        //               ?.daily[widget.index!]
-                                        //               .sunrise),
-                                        //           //Replace
-                                        //           style: const TextStyle(
-                                        //             fontWeight: FontWeight.bold,
-                                        //           ),
-                                        //         )
-                                        //       ],
-                                        //     ),
-                                        //     Column(
-                                        //       children: [
-                                        //         const Text(
-                                        //           'Sunset',
-                                        //           //replace
-                                        //           style: TextStyle(
-                                        //             color: Colors.black54,
-                                        //           ),
-                                        //         ),
-                                        //         const SizedBox(
-                                        //           height: 8,
-                                        //         ),
-                                        //         Container(
-                                        //           padding: const EdgeInsets.all(
-                                        //               10.0),
-                                        //           height: 70,
-                                        //           width: 70,
-                                        //           decoration:
-                                        //               const BoxDecoration(
-                                        //             color: Color(0xffE0E8FB),
-                                        //             borderRadius:
-                                        //                 BorderRadius.all(
-                                        //                     Radius.circular(
-                                        //                         15)),
-                                        //           ),
-                                        //           child: Image.asset(
-                                        //               'assets/sunset.png'),
-                                        //           //replace
-                                        //         ),
-                                        //         const SizedBox(
-                                        //           height: 8,
-                                        //         ),
-                                        //         Text(
-                                        //           getTime(widget
-                                        //               .weatherDataDaily
-                                        //               ?.daily[widget.index!]
-                                        //               .sunset),
-                                        //           //Replace
-                                        //           style: const TextStyle(
-                                        //             fontWeight: FontWeight.bold,
-                                        //           ),
-                                        //         )
-                                        //       ],
-                                        //     ),
-                                        //   ],
-                                        // )
                                       ],
                                     )),
                               ),
@@ -515,10 +380,10 @@ class _DetailPage extends State<DetailPage> {
                         )),
                     Positioned(
                         top: 280,
-                        left: 20,
+                        left: 8,
                         child: SizedBox(
-                          height: 240,
-                          width: size.width * .9,
+                          height: 370,
+                          width: size.width * .96,
                           child: ListView.builder(
                               scrollDirection: Axis.vertical,
                               itemCount: widget.weatherDataDaily?.daily.length,
@@ -526,7 +391,7 @@ class _DetailPage extends State<DetailPage> {
                                 return Container(
                                   margin: const EdgeInsets.only(
                                       left: 10, top: 10, right: 10, bottom: 5),
-                                  height: 80,
+                                  height: 90,
                                   width: size.width,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -535,14 +400,14 @@ class _DetailPage extends State<DetailPage> {
                                       boxShadow: [
                                         BoxShadow(
                                           color:
-                                              Colors.cyanAccent.withOpacity(.1),
+                                              Colors.cyanAccent.withOpacity(.3),
                                           spreadRadius: 5,
                                           blurRadius: 20,
                                           offset: const Offset(0, 3),
                                         ),
                                       ]),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(14.0),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -554,6 +419,8 @@ class _DetailPage extends State<DetailPage> {
                                               ?.daily[index].dt),
                                           style: const TextStyle(
                                             color: Color(0xff6696f5),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                         Row(
@@ -588,9 +455,16 @@ class _DetailPage extends State<DetailPage> {
                                           children: [
                                             Image.network(
                                                 'https://openweathermap.org/img/wn/${widget.weatherDataDaily?.daily[index].weather![0].icon ?? '01d'}@2x.png',
-                                                width: 30),
+                                                width: 40),
                                             Text(
-                                                '${widget.weatherDataDaily?.daily[index].weather![0].description}'),
+                                              capitalize(widget
+                                                  .weatherDataDaily
+                                                  ?.daily[index]
+                                                  .weather![0]
+                                                  .description),
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w500),
+                                            ),
                                           ],
                                         )
                                       ],

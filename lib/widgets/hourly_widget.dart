@@ -48,9 +48,7 @@ class _HourlyWeatherWidget extends State<HourlyWeatherWidget> {
       case 6:
         text = getTime(widget.weatherDataHourly?.hourly[12].dt);
         break;
-      case 7:
-        text = getTime(widget.weatherDataHourly?.hourly[14].dt);
-        break;
+
       default:
         return Container();
     }
@@ -63,7 +61,7 @@ class _HourlyWeatherWidget extends State<HourlyWeatherWidget> {
 
   @override
   Widget build(BuildContext context) {
-    List<int> showingTooltipOnSpots = [0, 1, 2, 3, 4, 5, 6, 7];
+    List<int> showingTooltipOnSpots = [0, 1, 2, 3, 4, 5, 6];
     List<FlSpot> chartData = [
       FlSpot(0, widget.weatherDataHourly?.hourly[0].temp!.toDouble() ?? 0),
       FlSpot(1, widget.weatherDataHourly?.hourly[2].temp!.toDouble() ?? 0),
@@ -72,7 +70,6 @@ class _HourlyWeatherWidget extends State<HourlyWeatherWidget> {
       FlSpot(4, widget.weatherDataHourly?.hourly[8].temp!.toDouble() ?? 0),
       FlSpot(5, widget.weatherDataHourly?.hourly[10].temp!.toDouble() ?? 0),
       FlSpot(6, widget.weatherDataHourly?.hourly[12].temp!.toDouble() ?? 0),
-      FlSpot(7, widget.weatherDataHourly?.hourly[14].temp!.toDouble() ?? 0),
     ];
     // print(widget.weatherDataHourly?.hourly[1].dt);
     // print(widget.weatherDataHourly?.hourly[2].dt);
