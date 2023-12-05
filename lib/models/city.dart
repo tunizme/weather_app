@@ -23,9 +23,9 @@ class City {
     }
   }
 
-  static removeCity(City city) {
+  static removeCity(index) {
     if (citiesList.length != 1) {
-      citiesList.remove(city);
+      citiesList.removeAt(index);
     }
   }
 }

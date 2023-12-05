@@ -16,11 +16,10 @@ class ManageCitiesPage extends StatefulWidget {
 }
 
 class _ManageCitiesPage extends State<ManageCitiesPage> {
-  List<City> cities = [];
+  var cities = City.getCities();
   @override
   void initState() {
     super.initState();
-    cities = City.getCities();
   }
 
   @override
@@ -43,32 +42,45 @@ class _ManageCitiesPage extends State<ManageCitiesPage> {
           children: [
             const _AsyncSearchAnchor(),
             const SizedBox(height: 20),
-            SizedBox(
-                height: 360,
-                child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: cities.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        padding: const EdgeInsets.all(16.0),
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: Colors
-                              .lightBlue[100], // Light blue background color
-                          borderRadius: BorderRadius.circular(8.0),
+            Flexible(
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
+                itemCount: cities.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    padding: const EdgeInsets.all(16.0),
+                    margin: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color:
+                          Colors.lightBlue[100], // Light blue background color
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          cities[index].cityData.name,
+                          style: const TextStyle(fontSize: 20.0),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              cities[index].cityData.name,
-                              style: const TextStyle(fontSize: 20.0),
-                            ),
-                            const Icon(Icons.location_on),
-                          ],
-                        ),
-                      );
-                    }))
+                        IconButton(
+                            onPressed: () {
+                              City.removeCity(index);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const HomePage()));
+                              setState(() {
+                                cities = City.getCities();
+                              });
+                            },
+                            icon: const Icon(Icons.delete))
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -173,14 +185,17 @@ class _AsyncSearchAnchorState extends State<_AsyncSearchAnchor> {
             titleTextStyle: const TextStyle(fontSize: 20, color: Colors.black),
             title: Text(item),
             onTap: () {
+              City.addCity(CityData(
+                  name: _cityData['name'],
+                  lat: _cityData['latitude'],
+                  lon: _cityData['longitude']));
+              controller.closeView(_currentQuery);
+              controller.clear();
+              controller.clearComposing();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const HomePage()));
               setState(() {
-                City.addCity(CityData(
-                    name: _cityData['name'],
-                    lat: _cityData['latitude'],
-                    lon: _cityData['longitude']));
-                cities = City.getCities();
-                controller.closeView(item);
-                Navigator.pop(context);
+                City.citiesList = City.getCities();
               });
             },
           );

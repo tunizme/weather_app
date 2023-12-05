@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/models/city.dart';
 import 'package:weather_app/models/location_model.dart';
@@ -18,9 +17,9 @@ class HomePage extends StatefulWidget {
 }
 
 CityData? _cityData;
-List<City> cities = [];
 
 class _HomePageState extends State<HomePage> {
+  var cities = City.getCities();
   bool _isLoading = true;
   final _weatherService = WeatherService('d8591a8ab96509c8bff12086028efeca');
   WeatherDataCurrent? _weatherDataCurrent;
@@ -39,7 +38,6 @@ class _HomePageState extends State<HomePage> {
   _fetchLocation(CityData newCityData) async {
     setState(() {
       _cityData = newCityData;
-
       _fetchWeather();
     });
   }
@@ -57,9 +55,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    setState(() {
-      cities = City.getCities();
-    });
+    super.initState();
+
+    _isLoading = true;
     if (cities.isNotEmpty) {
       _cityData = cities[cities.length - 1].cityData;
     }
@@ -69,8 +67,6 @@ class _HomePageState extends State<HomePage> {
     } else {
       _fetchLocation(_cityData!);
     }
-
-    super.initState();
   }
 
   @override
@@ -92,10 +88,13 @@ class _HomePageState extends State<HomePage> {
               leading: IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () {
+                  // Navigator.push returns a Future that completes after calling
+                  // Navigator.pop on the Selection Screen.
                   Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                          builder: (context) => const ManageCitiesPage()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ManageCitiesPage()),
+                  );
                 },
               ),
               title: Text(
@@ -114,12 +113,13 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.only(right: 10),
                       items: cities.map((City location) {
                         return DropdownMenuItem(
+                            enabled: true,
                             value: location.cityData,
                             child: Text(location.cityData.name));
                       }).toList(),
                       onChanged: (CityData? newValue) {
                         setState(() {
-                          _cityData = newValue!;
+                          _cityData = newValue;
                           _isLoading = true;
                           _fetchWeather();
                         });
